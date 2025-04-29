@@ -1,5 +1,7 @@
+require("dotenv").config();
 const express = require('express');
 const app = express();
+const port = process.env.PORT || 3001;
 const sequelize = require('./config/database');
 const usuarioRoutes = require('./routes/usuarioRoutes');
 
@@ -13,8 +15,8 @@ app.use('/api', usuarioRoutes);
 sequelize.sync()
   .then(() => {
     console.log('Conexión a base de datos exitosa');
-    app.listen(3000, () => {
-      console.log('Servidor corriendo en http://localhost:3000');
+    app.listen(port, () => {
+      console.log('Servidor corriendo');
     });
   })
   .catch(error => console.error('Error al conectar:', error));
